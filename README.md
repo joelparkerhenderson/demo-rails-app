@@ -183,3 +183,22 @@ Output should include:
 Created database 'demo_rails_app_development'
 Created database 'demo_rails_app_test'
 ```
+
+
+## Launch
+
+Launch the Rails Puma server:
+
+```sh
+bin/rails server
+```
+
+Output should include:
+
+```sh
+Puma starting in single mode...
+* Listening on http://127.0.0.1:3000
+```
+
+Browse <http://127.0.0.1:3000> and you should see the Rails welcome page.
+
