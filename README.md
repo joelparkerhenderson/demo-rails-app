@@ -95,4 +95,50 @@ Append to file `.gitgnore`:
 
 ```sh
 git add -A && git commit -am "Add .gitignore rule for dotenv file /.env"
+touch .env
+```
+
+
+## Set database access
+
+For a demo app, we prefer to set database access via environment variables.
+
+For a production app, we prefer to set database access via ephemeral controls such as via Hashicorp Vault.
+
+For a naming convention, we prefer explicit database access environment variables:
+
+* The database server name: POSTGRES
+
+* The database server object: USER
+
+* The role identifier: DEMO_RAILS_APP
+
+* The role attribute: USERNAME or PASSWORD
+
+* The word FOR and the runtime environment: DEVELOPMENT or TEST or PRODUCTION
+
+
+For our password, we prefer to generate a strong random password, such as a strong random 32-digit number:
+
+```sh
+printf "%s\n" $(LC_ALL=C < /dev/urandom tr -dc '[:digit:]' | head -c32)
+```
+
+Edit file `.env` to set the database access enviornment variables and the generated passwords:
+
+```sh
+POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_DEVELOPMENT=demo_rails_app
+POSTGRES_USER_DEMO_RAILS_APP_PASSWORD_FOR_DEVELOPMENT=11053635016261456248726591454979
+
+POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_TEST=demo_rails_app
+POSTGRES_USER_DEMO_RAILS_APP_PASSWORD_FOR_TEST=82138770260839801404701988766919
+
+POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_PRODUCTION=demo_rails_app
+POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_PRODUCTION=59637922222719767183438989864425
+```
+
+Create the database role and enter the password for development:
+
+```sh
+createuser --username=postgres --pwprompt --createdb demo_rails_app
 ```
