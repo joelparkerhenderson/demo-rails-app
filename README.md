@@ -81,9 +81,18 @@ Add to `Gemfile`:
 gem "dotenv-rails", groups: [:development, :test]
 ```
 
-Run:
-
 ```sh
 bundle
 git add -A && git commit -am "Add gem dotenv-rails"
+```
+
+Append to file `.gitgnore`:
+
+```gitignore
+# Ignore dotenv environment variable file.
+/.env
+```
+
+```sh
+git add -A && git commit -am "Add .gitignore rule for dotenv file /.env"
 ```
