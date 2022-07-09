@@ -24,6 +24,8 @@ default: &default
 development:
   <<: *default
   database: demo_rails_app_development
+  username: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_DEVELOPMENT"] %>
+  password: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_PASSWORD_FOR_DEVELOPMENT"] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +60,8 @@ development:
 test:
   <<: *default
   database: demo_rails_app_test
+  username: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_TEST"] %>
+  password: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_PASSWORD_FOR_TEST"] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -82,5 +86,5 @@ test:
 production:
   <<: *default
   database: demo_rails_app_production
-  username: demo_rails_app
-  password: <%= ENV["DEMO_RAILS_APP_DATABASE_PASSWORD"] %>
+  username: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_PRODUCTION"] %>
+  password: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_PASSWORD_FOR_PRODUCTION"] %>

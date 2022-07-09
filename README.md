@@ -142,3 +142,44 @@ Create the database role and enter the password for development:
 ```sh
 createuser --username=postgres --pwprompt --createdb demo_rails_app
 ```
+
+
+## Prepare the database
+
+Edit file `config/database.yml` to add each section's username and password:
+
+```yaml
+development:
+  <<: *default
+  database: demo_rails_app_development
+  username: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_DEVELOPMENT"] %>
+  password: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_DEVELOPMENT"] %>
+  …
+
+test:
+  <<: *default
+  database: demo_rails_app_test
+  username: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_TEST"] %>
+  password: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_TEST"] %>
+  …
+
+production:
+  <<: *default
+  database: demo_rails_app_production
+  username: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_PRODUCTION"] %>
+  password: <%= ENV["POSTGRES_USER_DEMO_RAILS_APP_USERNAME_FOR_PRODUCTION"] %>
+  …
+```
+
+Run:
+
+```sh
+bin/rails db:prepare
+```
+
+Output should include:
+
+```sh
+Created database 'demo_rails_app_development'
+Created database 'demo_rails_app_test'
+```
