@@ -248,3 +248,30 @@ end
 ```sh
 git add -A && git commit -am "Add generators with primary key type UUID"
 ```
+
+
+## Install ActiveStorage
+
+Add to `Gemfile`:
+
+```ruby
+gem "image_processing", ">= 1.2"
+```
+
+Run:
+
+```sh
+bundle
+bin/rails active_storage:install
+```
+
+## Customize ActiveStorage
+
+We are using UUIDs instead of integers as primary keys on our models, so we need to change the column type of `active_storage_attachments.record_id` and `active_storage_variant_records.id` in the generated migration accordingly.
+
+Run:
+
+```sh
+bin/rails db:migrate
+```
+
