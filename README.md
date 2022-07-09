@@ -1,24 +1,89 @@
-# README
+# Demo Rails app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Demonstration of:
 
-Things you may want to cover:
+* [Ruby][https://www.ruby-lang.org/en/) programming language
 
-* Ruby version
+* [Ruby on Rails](https://rubyonrails.org) web framework
 
-* System dependencies
+* [Postgres](https://www.postgresql.org) relational database
 
-* Configuration
+* [SQLite](https://www.sqlite.org/index.html) lightweight database
 
-* Database creation
 
-* Database initialization
+## Prepare
 
-* How to run the test suite
+If you use the command `asdf` to version:
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+asdf global ruby latest
+asdf global postgres latest
+```
 
-* Deployment instructions
+Have Ruby 3?
 
-* ...
+```sh
+ruby --version
+```
+
+Have Rails 7?
+
+```sh
+gem list rails
+```
+
+Have Postgres 14?
+
+```sh
+postgres --version
+```
+
+Have SQLite 3?
+
+```sh
+sqlite3 --version
+```
+
+
+## New demo
+
+Create a new demo:
+
+```sh
+rails new demo_rails_app --database=postgresql
+cd demo_rails_app
+git add -A && git commit -am "Run: rails new demo_rails_app --database=postgresql"
+```
+
+If you use `asdf` then set Ruby and Postgres
+
+```sh
+asdf local ruby latest
+asdf local postgres latest
+asdf install
+git add -A && git commit -am "Add asdf local ruby latest and local postgres latest"
+```
+
+Verify you can use the Postgres control command `pg_ctl`:
+
+```
+pg_ctl stop
+pg_ctl start
+```
+
+
+## Add gem dotenv-rails
+
+Add to `Gemfile`:
+
+```ruby
+# Environment variables
+gem "dotenv-rails", groups: [:development, :test]
+```
+
+Run:
+
+```sh
+bundle
+git add -A && git commit -am "Add gem dotenv-rails"
+```
