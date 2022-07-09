@@ -202,3 +202,35 @@ Puma starting in single mode...
 
 Browse <http://127.0.0.1:3000> and you should see the Rails welcome page.
 
+
+## Enable Postgres UUID primary keys
+
+Enable Postgres UUID primary keys and their functions via pgcrypto:
+
+```sh
+bin/rails generate migration EnableExtensionPgcrypto
+```
+
+Edit file `db/migration/*_enable_extension_pgcrypto`:
+
+```ruby
+class EnableUUID < ActiveRecord::Migration
+  def change
+    enable_extension 'pgcrypto'
+  end
+end
+```
+
+```sh
+bin/rails db:migrate
+git add -A && git commit -am "Add db migration to enable extension pgcrypto"
+```
+
+Create file `config/initializers/generators.rb`:
+
+```ruby
+Rails.application.config.generators do |g|
+  g.orm :active_record, primary_key_type: :uuid
+end
+```
+
