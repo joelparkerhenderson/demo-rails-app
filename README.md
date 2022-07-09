@@ -52,7 +52,7 @@ Create a new demo:
 ```sh
 rails new demo_rails_app --database=postgresql
 cd demo_rails_app
-git add -A && git commit -am "Run: rails new demo_rails_app --database=postgresql"
+git add -A && git commit -am "Run rails new demo_rails_app --database=postgresql"
 ```
 
 If you use `asdf` then set Ruby and Postgres
@@ -81,6 +81,8 @@ Add to `Gemfile`:
 gem "dotenv-rails", groups: [:development, :test]
 ```
 
+Run:
+
 ```sh
 bundle
 git add -A && git commit -am "Add gem dotenv-rails"
@@ -93,13 +95,15 @@ Append to file `.gitgnore`:
 /.env
 ```
 
+Run:
+
 ```sh
 git add -A && git commit -am "Add .gitignore rule for dotenv file /.env"
 touch .env
 ```
 
 
-## Set database access
+## Create the database access
 
 For a demo app, we prefer to set database access via environment variables.
 
@@ -116,7 +120,6 @@ For a naming convention, we prefer explicit database access environment variable
 * The role attribute: USERNAME or PASSWORD
 
 * The word FOR and the runtime environment: DEVELOPMENT or TEST or PRODUCTION
-
 
 For our password, we prefer to generate a strong random password, such as a strong random 32-digit number:
 
@@ -144,7 +147,7 @@ createuser --username=postgres --pwprompt --createdb demo_rails_app
 ```
 
 
-## Prepare the database
+## Configure the database access
 
 Edit file `config/database.yml` to add each section's username and password:
 
@@ -171,7 +174,15 @@ production:
   …
 ```
 
+RUn:
+
+```sh
+git add -A && git commit -am "Add database access usernames and passwords"
+```
 Run:
+
+
+## Pepare the database
 
 ```sh
 bin/rails db:prepare
@@ -234,3 +245,6 @@ Rails.application.config.generators do |g|
 end
 ```
 
+```sh
+git add -A && git commit -am "Add generators with primary key type UUID"
+```
