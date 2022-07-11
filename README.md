@@ -196,7 +196,7 @@ Created database 'demo_rails_app_test'
 ```
 
 
-## Launch
+## Launch the server
 
 Launch the Rails Puma server:
 
@@ -266,4 +266,62 @@ bin/rails active_storage:install
 bin/rails db:migrate
 ```
 
-This creates a database migration file `db/migrate/*_create_active_storage_tables.active_storage.rb`.
+The project now has a new database migration file `db/migrate/*_create_active_storage_tables.active_storage.rb`.
+
+
+## Add scaffolds for users and groups
+
+Generate scaffolds for users and groups:
+
+```sh
+bin/rails generate scaffold User name:string description:string
+bin/rails generate scaffold Group name:string description:string
+bin/rails generate scaffold Membership group:references user:references
+bin/rails db:migrate
+```
+
+Edit file `app/models/user.rb`
+
+```ruby
+class User < ApplicationRecord
+  has_many :memberships
+  has_many :groups, through: :memberships
+end
+```
+
+Edit file `app/models/group.rb`
+
+```ruby
+class Group < ApplicationRecord
+  has_many :memberships
+  has_many :users, through: :memberships
+end
+```
+
+
+## Add root route
+
+Edit file `config/routes`:
+
+```ruby
+root "users#index"
+```
+
+
+## Add Devise authentication
+
+Add to `Gemfile`:
+
+```ruby
+# Devise authentication
+gem "devise"
+```
+
+Setup:
+
+```sh
+bundle
+rails generate devise:install
+rails generate devise User
+rails db:migrate
+```
